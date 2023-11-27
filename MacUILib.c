@@ -78,7 +78,7 @@ print_ptr MacUILib_printf;
 		usleep(usec);
 	}
 
-		int MacUILib_hasChar()
+	int MacUILib_hasChar()
 	{
 		char ch = getch();
 		if(ch == ERR)
