@@ -40,6 +40,10 @@ void Player::updatePlayerDir()
             mainGameMechsRef->incrementScore();
             break;
 
+        case '2':
+            mainGameMechsRef->setLoseTrue();
+            break;
+
         case ' ':
             mainGameMechsRef->setExitTrue();
             break;
@@ -65,7 +69,7 @@ void Player::updatePlayerDir()
 
 
     }    
-    mainGameMechsRef-> clearInput(); //clear input to ensure non repeating input
+    
 }
 
 void Player::movePlayer()

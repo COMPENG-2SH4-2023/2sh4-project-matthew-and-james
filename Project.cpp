@@ -51,13 +51,15 @@ void Initialize(void)
 
 void GetInput(void)
 {
-
+    myGM->getInput();
 }
 
 void RunLogic(void)
 {
     myPlayer -> updatePlayerDir();
     myPlayer -> movePlayer();
+
+    myGM->clearInput(); //clear input to ensure non repeating input
 }
 
 void DrawScreen(void)
@@ -84,6 +86,11 @@ void DrawScreen(void)
 
     MacUILib_printf("Press Spacebar to quit\n");
     MacUILib_printf("your score is %d\n", myGM->getScore());
+
+    if (myGM->getLoseFlagStatus() == true){
+        MacUILib_printf("you ran into your tail. you Lose!\n");
+        myGM->setExitTrue();
+    }
 }
 
 void LoopDelay(void)
