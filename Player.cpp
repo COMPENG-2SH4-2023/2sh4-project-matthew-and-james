@@ -123,15 +123,25 @@ void Player::movePlayer()
             break;
     }
 
-    playerPosList -> insertHead(currHead);
+    playerPosList -> insertHead(currHead);  //default movement
     playerPosList -> removeTail();
+
+    if(checkSelfCollision()){     //check self collision
+        mainGameMechsRef->setLoseTrue(); 
+        mainGameMechsRef->setExitTrue();
+    }
+
+    if (checkFoodConsumption()){   //check food consumption 
+        increasePlayerLength();    // if it's true we increase player length, regenerate food, increment score
+        mainFoodRef->generateFood(playerPosList);
+    }
 
 }
 
 
 bool Player::checkFoodConsumption() {
     objPos currHead;
-    playerPosList->getHeadElement(currHead);
+    playerPosList->getHeadElement(currHead); //get head element
 
     objPos foodPos;
     mainFoodRef->getFoodPos(foodPos);
@@ -150,21 +160,21 @@ void Player::increasePlayerLength() {
 
     playerPosList->insertHead(currHead); // Insert head w/o removing tail
 
-    mainGameMechsRef->incrementScore();
+    mainGameMechsRef->incrementScore();   //increment score
 }
 
 
 bool Player::checkSelfCollision() {
     
     objPos currHead;
-    playerPosList->getHeadElement(currHead);
+    playerPosList->getHeadElement(currHead); //take currhead position
 
     objPos body;
 
-    for (int i = 1; i < playerPosList->getSize(); i++) {
+    for (int i = 1; i < playerPosList->getSize(); i++) {  //compare current head for all elements of body
         playerPosList->getElement(body, i);
 
-        if (currHead.isPosEqual(&body)) {
+        if (currHead.isPosEqual(&body)) {  //if equal, return true "self collision detected"
             // Self-collision detecte
             return true;
         }

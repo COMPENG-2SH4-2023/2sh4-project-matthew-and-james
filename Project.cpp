@@ -71,17 +71,6 @@ void RunLogic(void)
 
     myGM->clearInput(); //clear input to ensure non repeating input
 
-    if(myPlayer -> checkSelfCollision()){
-        myGM->setLoseTrue();
-        myGM->setExitTrue();
-    }
-
-    if (myPlayer -> checkFoodConsumption()){
-        myPlayer -> increasePlayerLength();
-        objPosArrayList* playerBody = myPlayer -> getPlayerPos();
-        myFood->generateFood(playerBody);
-    }
-
 }
 
 void DrawScreen(void)
